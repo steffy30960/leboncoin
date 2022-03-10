@@ -1,0 +1,13 @@
+body{
+    padding-left: 350px;
+}
+
+.form-control {
+    background-color: orange;
+}
+.navbar-light.navbar-light{
+    color: orange;
+}
+.btn-outline-success{
+   color:black;
+}
