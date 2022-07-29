@@ -16,19 +16,23 @@
 
 <body>
 <!----------------------navbar---------------------------------->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Leboncoin</a>
+    <a class="navbar-brand text-warning" href="?page=list">Leboncoin</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <form class="d-flex"method="POST" action="?page=createAnnonce">
-        <input class="form-control me-2" type="search" placeholder="Déposer une annonce" aria-label="Search">
+    <div class="col-auto">
+      <a  class="btn btn-warning" href="?page=createAnnonce" >Déposer une annonce</a>
+        </div>
+        
+    <form class="d-flex"method="POST" action="?page=search">
+       
+    
         <div class="col-auto">
-      <button type="submit" class="btn btn-primary"onclick="href = 'formulaireajout.php'>Ajouter</button>
-  </div>
-        <button class="btn btn-outline-success" type="submit">Rechercher</button>
+        <a class="btn" href="?page=search">Rechercher</a>
+        </div>
       </form>
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
@@ -50,6 +54,7 @@
 <!--------------------------fin navbar------------------------->
 
 <!---------------------------card------------------------------>
+<H1 class="text-center my-3">Toutes nos annonces</H1>
     <div class="row row-cols-1 row-cols-md-3 g-4">
         <?php foreach ($annonces as $annonce) : ?>
             <div class="card">
@@ -60,11 +65,45 @@
                       </a>
                     </h5>
                     <p class="card-text"><?= $annonce->getDescription() ?></p>
+                    <p class="card-text"><?= $annonce->getDepartement() ?></p>
                 </div>
             </div>
         <?php endforeach ?>
     </div>
   <!---------------------------fin card------------------------------>  
+  <?php if (ceil($total_pages / $num_results_on_page) > 0): ?>
+			<ul class="pagination">
+				<?php if ($page > 1): ?>
+				<li class="prev"><a href="pagination.php?page=<?php echo $page-1 ?>">Prev</a></li>
+				<?php endif; ?>
+
+				<?php if ($page > 3): ?>
+				<li class="start"><a href="pagination.php?page=1">1</a></li>
+				<li class="dots">...</li>
+				<?php endif; ?>
+
+				<?php if ($page-2 > 0): ?><li class="page"><a href="pagination.php?page=<?php echo $page-2 ?>"><?php echo $page-2 ?></a></li><?php endif; ?>
+				<?php if ($page-1 > 0): ?><li class="page"><a href="pagination.php?page=<?php echo $page-1 ?>"><?php echo $page-1 ?></a></li><?php endif; ?>
+
+				<li class="currentpage"><a href="pagination.php?page=<?php echo $page ?>"><?php echo $page ?></a></li>
+
+				<?php if ($page+1 < ceil($total_pages / $num_results_on_page)+1): ?><li class="page"><a href="pagination.php?page=<?php echo $page+1 ?>"><?php echo $page+1 ?></a></li><?php endif; ?>
+				<?php if ($page+2 < ceil($total_pages / $num_results_on_page)+1): ?><li class="page"><a href="pagination.php?page=<?php echo $page+2 ?>"><?php echo $page+2 ?></a></li><?php endif; ?>
+
+				<?php if ($page < ceil($total_pages / $num_results_on_page)-2): ?>
+				<li class="dots">...</li>
+				<li class="end"><a href="pagination.php?page=<?php echo ceil($total_pages / $num_results_on_page) ?>"><?php echo ceil($total_pages / $num_results_on_page) ?></a></li>
+				<?php endif; ?>
+
+				<?php if ($page < ceil($total_pages / $num_results_on_page)): ?>
+				<li class="next"><a href="pagination.php?page=<?php echo $page+1 ?>">Next</a></li>
+				<?php endif; ?>
+			</ul>
+			<?php endif; ?>
+
+
+
+
     <!-- Optional JavaScript; choose one of the two! -->
 
 <!-- Option 1: Bootstrap Bundle with Popper -->
@@ -78,3 +117,7 @@
 </body>
 
 </html>
+<?php
+	$stmt->close();
+
+?>

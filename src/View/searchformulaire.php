@@ -43,34 +43,46 @@
   </div>
 </nav>
 <!--------------------------fin navbar------------------------->
-<!--------------------------formulaire d'ajout------------------------->
-<h1 class="text-center">Déposer un article</h1>
-<form method="POST">
-    <div class="col-md-8 mx-auto">
-  <div class="form-group">
-    <label for="name">Titre annonce</label>
-    <input type="text" class="form-control" id="name" placeholder="" name="name">
-  </div>
-  <div class="form-group">
-    <label for="prix">Prix</label>
-    <input type="text" class="form-control" id="prix" placeholder="" name="prix">
-  </div>
-  <div class="form-group">
-    <label for="description">Description</label>
-    <input type="text" class="form-control" id="description" placeholder="" name="description">
-  </div>
-  <div class="form-group">
-    <label for="categorie">Catégorie</label>
-    <input type="text" class="form-control" id="categorie" placeholder="" name="categorie">
-  </div>
-  <div class="form-group">
-    <label for="image">Photo</label>
-    <input type="file" class="form-control" id="image" placeholder="" name="image">
-  </div>
-  <button type="submit" class="btn btn-primary mt-3">Envoyer</button>
-</div>
-</form> 
-<!--------------------------fin formulaire d'ajout------------------------->
+<!--------------------------formulaire------------------------->
+<h1 class="text-center">Rechercher un article</h1>
+  <form method="POST">
+    <div class="col-sm-3 my-3">
+      <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+              <option selected>Catégorie</option>
+              <option value="1">Ameublement</option>
+              <option value="2">Animaux</option>
+              <option value="3">Maison</option>
+              <option value="4">Mode</option>
+              <option value="5">Téléphonie</option>
+              <option value="6">Véhicules</option>
+      </select>
+    </div>
+    <div class="form-row align-items-center">
+      <div class="col-sm-3 my-3">
+        <input type="text" class="form-control" id="inlineFormInputName" placeholder= "Que recherchez vous ?" name ="name">
+      </div>
+      </div>
+        <button type="submit" class="btn btn-primary my-3">Rechercher</button>
+      </div>
+    </div>
+  </form> 
+<!--------------------------fin formulaire ------------------------->
+<!---------------------------card------------------------------>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+        <?php foreach ($annonces as $annonce) : ?>
+            <div class="card">
+              <img src="<?= $annonce->getImage() ?>" alt=""> 
+                <div class="card-body">
+                    <h5 class="card-title"><a href="?page=annonce&list=<?= $annonce->getId() ?>">
+                            <?= $annonce->getName() ?>
+                      </a>
+                    </h5>
+                    <p class="card-text"><?= $annonce->getDescription() ?></p>
+                </div>
+            </div>
+        <?php endforeach ?>
+    </div>
+  <!---------------------------fin card------------------------------>  
 <!-- Option 1: Bootstrap Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 

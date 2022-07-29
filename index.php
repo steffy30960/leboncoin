@@ -18,6 +18,14 @@ class Application
             'controller' => 'AnnonceController',
             'method' => 'annonce'
         ],
+        'createAnnonce' => [
+            'controller' => 'ListController',
+            'method' => 'create'
+        ],
+        'search' => [
+            'controller' => 'SearchController',
+            'method' => 'index'
+        ],
         'error404' => [
             'controller' => 'ErrorController',
             'method' => 'error404'
