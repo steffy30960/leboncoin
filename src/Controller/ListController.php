@@ -13,25 +13,10 @@ class ListController extends AbstractController
         $annonceModel = new AnnonceModel();
 
         $annonces = $annonceModel->findAll();
-        // ma logique métier ici
-        // exemple récupérer des données en BDD
-        // traiter des formulaire
-        // vérifier que l'utilisateur a les droits
-        // etc...
-        
-        if (isset($_GET['page'])) {
-            $total_pages = $annonceModel->countpage();
-
-        }
-        if (isset($_GET['page'])) {
-            $num_results_on_page = $annonceModel->countpage();
-            
-        }
+      
 
         $this->render('list.php', [
-            'annonces' => $annonces,
-            'total_pages' => $total_pages,
-            'num_results_on_page' => $num_results_on_page,
+            'annonces' => $annonces, 
             
         ]);
         

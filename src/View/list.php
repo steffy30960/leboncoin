@@ -24,7 +24,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <div class="col-auto">
-      <a  class="btn btn-warning" href="?page=createAnnonce" >Déposer une annonce</a>
+      <a  class="btn" href="?page=createAnnonce" >Déposer une annonce</a>
         </div>
         
     <form class="d-flex"method="POST" action="?page=search">
@@ -66,44 +66,31 @@
                     </h5>
                     <p class="card-text"><?= $annonce->getDescription() ?></p>
                     <p class="card-text"><?= $annonce->getDepartement() ?></p>
+                    <p class="card-text"><?= $annonce->getDate_de_parution() ?></p>
                 </div>
             </div>
         <?php endforeach ?>
     </div>
   <!---------------------------fin card------------------------------>  
-  <?php if (ceil($total_pages / $num_results_on_page) > 0): ?>
-			<ul class="pagination">
-				<?php if ($page > 1): ?>
-				<li class="prev"><a href="pagination.php?page=<?php echo $page-1 ?>">Prev</a></li>
-				<?php endif; ?>
-
-				<?php if ($page > 3): ?>
-				<li class="start"><a href="pagination.php?page=1">1</a></li>
-				<li class="dots">...</li>
-				<?php endif; ?>
-
-				<?php if ($page-2 > 0): ?><li class="page"><a href="pagination.php?page=<?php echo $page-2 ?>"><?php echo $page-2 ?></a></li><?php endif; ?>
-				<?php if ($page-1 > 0): ?><li class="page"><a href="pagination.php?page=<?php echo $page-1 ?>"><?php echo $page-1 ?></a></li><?php endif; ?>
-
-				<li class="currentpage"><a href="pagination.php?page=<?php echo $page ?>"><?php echo $page ?></a></li>
-
-				<?php if ($page+1 < ceil($total_pages / $num_results_on_page)+1): ?><li class="page"><a href="pagination.php?page=<?php echo $page+1 ?>"><?php echo $page+1 ?></a></li><?php endif; ?>
-				<?php if ($page+2 < ceil($total_pages / $num_results_on_page)+1): ?><li class="page"><a href="pagination.php?page=<?php echo $page+2 ?>"><?php echo $page+2 ?></a></li><?php endif; ?>
-
-				<?php if ($page < ceil($total_pages / $num_results_on_page)-2): ?>
-				<li class="dots">...</li>
-				<li class="end"><a href="pagination.php?page=<?php echo ceil($total_pages / $num_results_on_page) ?>"><?php echo ceil($total_pages / $num_results_on_page) ?></a></li>
-				<?php endif; ?>
-
-				<?php if ($page < ceil($total_pages / $num_results_on_page)): ?>
-				<li class="next"><a href="pagination.php?page=<?php echo $page+1 ?>">Next</a></li>
-				<?php endif; ?>
-			</ul>
-			<?php endif; ?>
-
-
-
-
+ <!-------------------------pagination-------------------------------->
+<nav>
+  <ul class="pagination">
+    <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?> ">
+      <a href="./?page=<?= $currentPage - 1 ?>"
+       class="page-link">Précédente</a>
+    </li>
+    <?php for($page = 1; $page <= $pages; $page++): ?>
+      <li class="page-item <?= ($currentPage == $page) ? "active" : "" ?>">
+        <a href="./?page=<?= $page ?>" class="page-link"><?= $page ?></a>
+      </li>
+    <?php endfor ?>
+    <li class="page-item <?= ($currentPage == $pages) ? "disabled" : "" ?>">
+      <a href="./?page=<?= $currentPage + 1 ?>" 
+      class="page-link">Suivante</a>
+    </li>
+  </ul>
+</nav>
+      <!--------------------------------fin pagination--------------------------->
     <!-- Optional JavaScript; choose one of the two! -->
 
 <!-- Option 1: Bootstrap Bundle with Popper -->
@@ -117,7 +104,4 @@
 </body>
 
 </html>
-<?php
-	$stmt->close();
 
-?>

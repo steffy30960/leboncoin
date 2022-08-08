@@ -4,6 +4,7 @@ namespace App\Controller;
 
 
 use App\Model\AnnonceModel;
+use App\Model\MessageModel;
 use App\Controller\AbstractController;
 
 class AnnonceController extends AbstractController
@@ -17,14 +18,39 @@ class AnnonceController extends AbstractController
         else {
             $annonce = $annonceModel->findAll();
         }
+        
+
+
+        $messageModel = new MessageModel();
+
+        if (isset ($_GET['list'])) {
+            $id = $_GET['list'];
+        }
+
+
+        // je recupere le message  et l'article_id depuis le formulaire
+        // $articlesId = $_POST['articlesId'];
+        
+        if (isset($_POST['message'])) {
+            $message = $_POST['message'];
+    
+            $result = $messageModel->save($message,$id);
+          
+}
+
 
        
         $this->render('annonce.php', [
             'annonce' => $annonce,
+            'result' => $result ?? null
+            
             
         ]);
-        
+    
+       
+
     }
+
     
  
 }

@@ -16,7 +16,7 @@
 <!----------------------navbar---------------------------------->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Leboncoin</a>
+    <a class="navbar-brand" href="?page=list">Leboncoin</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -44,17 +44,42 @@
 </nav>
 <!--------------------------fin navbar------------------------->
 <!---------------------------card------------------------------>
-
-<div class="card" style="width: 18rem;">
-  <img src="<?= $annonce->getImage() ?>" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title"><?= $annonce->getName() ?></h5>
-    <p class="card-text"><?= $annonce->getDescription() ?></p>
-    <a href="#" class="btn btn-primary">Acheter</a>
+<div class="d-flex justify-content-center">
+  <div class="card text-center mt-3" style="width: 50rem;">
+    <img src="<?= $annonce->getImage() ?>" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title"><?= $annonce->getName() ?></h5>
+      <p class="card-text"><?= $annonce->getDescription() ?></p>
+      <a href="#" class="btn btn-primary">Acheter</a>
+    </div>
   </div>
 </div>
 
 <!-------------------fin card------------------------------>  
+<!---------------formulaire de réponse a l'annonce------------------------------->
+<?php if($result == true): ?>
+  <p> message envoyé avec succès</p>
+<?php elseif($result === false): ?>
+  <p> "Le message n'a pas été envoyé" </p>
+<?php endif; ?>
+   
+  
+<div class="d-flex justify-content-center mt-3">
+<div class="card" style="width: 50rem;">
+<form class="row g-3" method="POST">
+<div class="col-md-6">
+<label for="message" class="form-label">Votre message :</label>
+</div>
+<div class="input-group">
+  <textarea class="form-control" aria-label="With textarea" name="message" ></textarea>
+</div>
+<div class="col-12">
+    <button type="submit" class="btn btn-primary">Envoyer</button>
+  </div>
+  
+</form>
+</div>
+</div>
     <!-- Optional JavaScript; choose one of the two! -->
 
 <!-- Option 1: Bootstrap Bundle with Popper -->

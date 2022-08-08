@@ -122,30 +122,51 @@ class AnnonceModel
 
     return $this->pdo->lastInsertId();
     }
+    function pagination() {
+    //je determine sur quelle page je me trouve 
+    if(isset($GET['page']) && !empty($GET['page'])) {  // verifie si parametre en Get et verifie pas vide
+        $currentPage = (int) strip_tags($GET['page']); //si on a on prend et on met en entier
+    }else{
+        $currentPage = 1;  // sinon si y a rien on dit on est page 1
+    }
+    
+    // on determine le nombre total d'aticles 
+    $sql = 'SELECT COUNT(*) AS nb_articles FROM `articles`;';
 
-    public function countpage()
-    {
-        // je recupere le nombre total d'articles dans ma table article".
-        $total_pages =  $this->pdo->prepare('SELECT COUNT(*) AS nb_articles FROM `articles`');
+    //je prepare la requete 
+    $query = $this->pdo->prepare($sql);
+    // j'execute
+    $query->execute();
+    
+    //je recupere le nombre d'articles 
+    $result = $query->fetch();
+    //je declare la varieble qui recupere 
+    $nbArticles = (int) $result['nb_articles'];
 
-        // je verifie si le numéro de page est spécifié et vérifie si c'est un nombre, sinon je mets le numéro de page par défaut qui est 1.
-        $page = isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
+    // je détermine le nombre d'article par page
+    $parPage = 15;
 
-        //Nombre de résultats à afficher sur chaque page.
-        $num_results_on_page = 15;
-            
-            if ( $pdoStatement= $this->pdo->prepare('SELECT * FROM articles ORDER BY name LIMIT ?,?')) {
-                //Calculez la page pour obtenir les résultats dont nous avons besoin à partir de notre tableau.
-                $calcul_page = ($page - 1) * $num_results_on_page;
-                $pdoStatement->bindParam('calcul_page', $calcul_page,PDO::PARAM_INT);
-                $pdoStatement->bindParam('num_results_on_page', $num_results_on_page ,PDO::PARAM_INT);
-        
-             
-            
-               
-              
-            }
-        }
+    // je calule le nombre de pages total 
+    $pages = ceil($nbArticles / $parPage); // ceil arrondi a l'entier superieur
+
+    // je calcul le premier aticle de la page total
+    $premier = ($currentPage * $parPage) - $parPage;
+
+    // je recupere mes articles par ordre décroissant 
+    $sql = 'SELECT * FROM `articles` ORDER BY `date_de_parution` DESC LIMIT :premier, :parPage;';
+    //je prepare la requete 
+    $query = $this->pdo->prepare($sql);
+    $query->bindValue(':premier', $premier, PDO::PARAM_INT);
+    $query->bindValue(':parpage', $parPage, PDO::PARAM_INT);
+    // j'execute
+    $query->execute($sql);
+
+    // je recupere les valeurs dans un tableau associatif
+    $result = $query->fetchAll(PDO::FETCH_ASSOC);
+    //je declare la variable qui recupere 
+    $articles = $result;
+   
+    }
     /**
      * Get the value of id
      */ 
