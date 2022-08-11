@@ -25,8 +25,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <div class="col-auto">
       <a  class="btn" href="?page=createAnnonce" >Déposer une annonce</a>
-        </div>
-        
+    </div>
+    <div class="col-auto">
+      <a  class="btn" href="?page=admin" >Admin</a>
+    </div>    
     <form class="d-flex"method="POST" action="?page=search">
        
     
@@ -54,23 +56,27 @@
 <!--------------------------fin navbar------------------------->
 
 <!---------------------------card------------------------------>
-<H1 class="text-center my-3">Toutes nos annonces</H1>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
+<div class="position">
+<H1 class="text-center my-3 ">Toutes nos annonces</H1>
+    <div class="row row-cols-1 row-cols-md-3 g-4 entourage">
         <?php foreach ($annonces as $annonce) : ?>
-            <div class="card">
-              <img src="<?= $annonce->getImage() ?>" alt=""> 
+            <div class=" card carte">
+              <img  class="taille"src="<?= $annonce->getImage() ?>" alt=""> 
                 <div class="card-body">
                     <h5 class="card-title"><a href="?page=annonce&list=<?= $annonce->getId() ?>">
                             <?= $annonce->getName() ?>
                       </a>
                     </h5>
-                    <p class="card-text"><?= $annonce->getDescription() ?></p>
-                    <p class="card-text"><?= $annonce->getDepartement() ?></p>
-                    <p class="card-text"><?= $annonce->getDate_de_parution() ?></p>
+                    <p class="card-text"> Catégorie : <?= $annonce->getCategorie() ?></p>
+                    <p class="card-text"> Description : <?= $annonce->getDescription() ?></p>
+                    <p class="card-text"> Département : <?= $annonce->getDepartement() ?></p>
+                    <p class="card-text"> date de parution : <?= $annonce->getDate_de_parution() ?></p>
+                    <p class="card-text"> Prix : <?= $annonce->getPrix() ?> euros</p>
                 </div>
             </div>
         <?php endforeach ?>
     </div>
+</div>
   <!---------------------------fin card------------------------------>  
  <!-------------------------pagination-------------------------------->
 <nav>

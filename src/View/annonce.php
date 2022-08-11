@@ -8,7 +8,7 @@
 
 <!-- Bootstrap CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<link rel="stylesheet" href="assets/css/list.css">
+<link rel="stylesheet" href="./../../assets/css/list.css">
 <title>Annonce</title>
 </head>
 
@@ -38,6 +38,9 @@
         <li class="nav-item">
           <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Se connecter</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="?page=admin" tabindex="-1" aria-disabled="true">Admin</a>
+        </li>
       </ul>
     </div>
   </div>
@@ -46,10 +49,12 @@
 <!---------------------------card------------------------------>
 <div class="d-flex justify-content-center">
   <div class="card text-center mt-3" style="width: 50rem;">
-    <img src="<?= $annonce->getImage() ?>" class="card-img-top" alt="...">
+    <img src="<?= $annonce->getImage() ?>" width="400px" height="400px" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title"><?= $annonce->getName() ?></h5>
-      <p class="card-text"><?= $annonce->getDescription() ?></p>
+      <p class="card-text"> Description : <?= $annonce->getDescription() ?></p>
+      <p class="card-text"> Département : <?= $annonce->getDepartement() ?></p>
+      <p class="card-text"> Prix : <?= $annonce->getPrix() ?> euros</p>
       <a href="#" class="btn btn-primary">Acheter</a>
     </div>
   </div>
@@ -58,7 +63,7 @@
 <!-------------------fin card------------------------------>  
 <!---------------formulaire de réponse a l'annonce------------------------------->
 <?php if($result == true): ?>
-  <p> message envoyé avec succès</p>
+  <p class="text-center text succes"> message envoyé avec succès</p>
 <?php elseif($result === false): ?>
   <p> "Le message n'a pas été envoyé" </p>
 <?php endif; ?>

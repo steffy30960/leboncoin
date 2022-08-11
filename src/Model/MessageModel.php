@@ -68,19 +68,13 @@ class MessageModel
 
 
          $query = $this->pdo->prepare($insert);
-        //j'execute la requete insert
 
-         $result = $query->execute();
-         return $result;
-       
-        //if($execute == true) {
-        //    $msgSucces = "message envoyé avec succès";
-        //}else{
-        //$msgError = "Le message n'a pas été envoyé";
+        //j'execute la requete insert
+        $result = $query->execute();
+        return $result;
+
         }
 
-    
- 
     /**
      * Get the value of date_parution
      */ 

@@ -22,12 +22,10 @@ class AnnonceController extends AbstractController
 
 
         $messageModel = new MessageModel();
-
+        // je recupere l'id de la page concernant l'article
         if (isset ($_GET['list'])) {
             $id = $_GET['list'];
         }
-
-
         // je recupere le message  et l'article_id depuis le formulaire
         // $articlesId = $_POST['articlesId'];
         
@@ -36,21 +34,11 @@ class AnnonceController extends AbstractController
     
             $result = $messageModel->save($message,$id);
           
-}
-
-
-       
+        }
         $this->render('annonce.php', [
             'annonce' => $annonce,
             'result' => $result ?? null
-            
-            
+
         ]);
-    
-       
-
     }
-
-    
- 
 }

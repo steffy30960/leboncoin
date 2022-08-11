@@ -64,6 +64,10 @@
     <input type="text" class="form-control" id="categorie" placeholder="" name="categorie">
   </div>
   <div class="form-group">
+    <label for="departement">Code postal</label>
+    <input type="text" class="form-control" id="categorie" placeholder="" name="departement">
+  </div>
+  <div class="form-group">
     <label for="image">Photo</label>
     <input type="file" class="form-control" id="image" placeholder="" name="image">
   </div>

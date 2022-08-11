@@ -30,7 +30,18 @@ class Application
             'controller' => 'ErrorController',
             'method' => 'error404'
         ],
-    
+        'admin' => [
+            'controller' => 'AdminController',
+            'method' => 'index'
+        ],
+        'delete' => [
+            'controller' => 'AdminController',
+            'method' => 'delete'
+        ],
+        'update' => [
+            'controller' => 'AdminController',
+            'method' => 'update'
+        ],
     ];
 
     const DEFAULT_ROUTE = 'list';

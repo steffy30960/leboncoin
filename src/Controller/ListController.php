@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Model\AnnonceModel;
 use App\Controller\AbstractController;
-use DateTimeImmutable;
+
 
 class ListController extends AbstractController
 {
@@ -13,7 +13,7 @@ class ListController extends AbstractController
         $annonceModel = new AnnonceModel();
 
         $annonces = $annonceModel->findAll();
-      
+        
 
         $this->render('list.php', [
             'annonces' => $annonces, 
@@ -33,6 +33,7 @@ class ListController extends AbstractController
             $description= trim($_POST['description']);
             $date_de_parution= new \Datetime;
             $categorie= trim($_POST['categorie']);
+            $departement= trim($_POST['departement']);
             $image= trim($_POST['image']);
         }
 
@@ -41,13 +42,33 @@ class ListController extends AbstractController
         if (!empty($name)) {
             // je crée
             $annonceModel = new AnnonceModel();
-            $annonce_id = $annonceModel->create($name, $prix, $description, $date_de_parution, $categorie, $image);
+            $annonce_id = $annonceModel->create($name, $prix, $description, $date_de_parution, $categorie, $image,$departement);
         }
 
         
         $this->render('formulaireajout.php', [
           
     ]);
+
+   
+    
+    }
+    public function paginations()
+    {
+        $annonceModel = new AnnonceModel();
+
+       
+     
+        
+        $result=$annonceModel->pagination();
+
+        $this->render('list.php', [
+            'result' => $result, 
+            
+        ]);
+        
+
+
     }
 }
     
