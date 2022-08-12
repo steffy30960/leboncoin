@@ -86,8 +86,8 @@ if (isset($_POST['name'])) {
     // je modifie
     $adminModel = new AdminModel();
 
-                $id = $_GET['id'];
-                $adminModel->update($id, $name, $prix, $description, $date_de_parution, $categorie, $image, $departement);
+            $id = $_GET['id'];
+            $adminModel->update($id, $name, $prix, $description, $date_de_parution, $categorie, $image, $departement);
             }
        
             $annonce = $adminModel->findById($_GET['id']);
@@ -95,7 +95,8 @@ if (isset($_POST['name'])) {
             $this->render('formulairemodification.php', [
                 'annonce' => $annonce,
             
-
         ]);
+        
         }
+      
     }

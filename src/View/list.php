@@ -58,20 +58,20 @@
 <!---------------------------card------------------------------>
 <div class="position">
 <H1 class="text-center my-3 ">Toutes nos annonces</H1>
-    <div class="row row-cols-1 row-cols-md-3 g-4 entourage">
-        <?php foreach ($annonces as $annonce) : ?>
-            <div class=" card carte">
-              <img  class="taille"src="<?= $annonce->getImage() ?>" alt=""> 
-                <div class="card-body">
-                    <h5 class="card-title"><a href="?page=annonce&list=<?= $annonce->getId() ?>">
-                            <?= $annonce->getName() ?>
+    <div class="row g-4 entourage">
+        <?php foreach ($cherchepages as $cherchepage) : ?>
+            <div class="card  carte" style="width: 20rem">
+              <img  class="taille"src="<?= $cherchepage->getImage() ?>" alt=""> 
+                <div class="card-body" style="width: 80rem">
+                    <h5 class="card-title"><a href="?page=annonce&list=<?= $cherchepage->getId() ?>">
+                            <?= $cherchepage->getName() ?>
                       </a>
                     </h5>
-                    <p class="card-text"> Catégorie : <?= $annonce->getCategorie() ?></p>
-                    <p class="card-text"> Description : <?= $annonce->getDescription() ?></p>
-                    <p class="card-text"> Département : <?= $annonce->getDepartement() ?></p>
-                    <p class="card-text"> date de parution : <?= $annonce->getDate_de_parution() ?></p>
-                    <p class="card-text"> Prix : <?= $annonce->getPrix() ?> euros</p>
+                    <p class="card-text"> Catégorie : <?= $cherchepage->getCategorie() ?></p>
+                    <p class="card-text"> Description : <?= $cherchepage->getDescription() ?></p>
+                    <p class="card-text"> Département : <?= $cherchepage->getDepartement() ?></p>
+                    <p class="card-text"> date de parution : <?= $cherchepage->getDate_de_parution() ?></p>
+                    <p class="card-text"> Prix : <?= $cherchepage->getPrix() ?> euros</p>
                 </div>
             </div>
         <?php endforeach ?>
@@ -79,23 +79,28 @@
 </div>
   <!---------------------------fin card------------------------------>  
  <!-------------------------pagination-------------------------------->
-<nav>
-  <ul class="pagination">
-    <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?> ">
-      <a href="./?page=<?= $currentPage - 1 ?>"
-       class="page-link">Précédente</a>
-    </li>
-    <?php for($page = 1; $page <= $pages; $page++): ?>
-      <li class="page-item <?= ($currentPage == $page) ? "active" : "" ?>">
-        <a href="./?page=<?= $page ?>" class="page-link"><?= $page ?></a>
+ <nav>
+  <div>
+    <ul class="pagination d-flex justify-content-center">
+      <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?> ">
+        <a href="./?page=list&p=<?= $currentPage - 1 ?>"
+        class="page-link">Précédente</a>
       </li>
-    <?php endfor ?>
-    <li class="page-item <?= ($currentPage == $pages) ? "disabled" : "" ?>">
-      <a href="./?page=<?= $currentPage + 1 ?>" 
-      class="page-link">Suivante</a>
-    </li>
-  </ul>
+      <?php for($page = 1; $page <= $nbPageTotals; $page++): ?>
+        <!-- Lien vers chacune des pages (activé si on se trouve sur la page correspondante) -->
+        <li class="page-item <?= ($currentPage == $page) ? "active" : "" ?>">
+          <a href="./?page=list&p=<?= $page ?>" class="page-link"><?= $page ?></a>
+        </li>
+      <?php endfor ?>
+      <!-- Lien vers la page suivante (désactivé si on se trouve sur la dernière page) -->
+      <li class="page-item <?= ($currentPage == $nbPageTotals) ? "disabled" : "" ?>">
+        <a href="./?page=list&p=<?= $currentPage + 1 ?>" 
+        class="page-link">Suivante</a>
+      </li>
+    </ul>
+  </div>
 </nav>
+
       <!--------------------------------fin pagination--------------------------->
     <!-- Optional JavaScript; choose one of the two! -->
 

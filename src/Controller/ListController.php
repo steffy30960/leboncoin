@@ -12,12 +12,23 @@ class ListController extends AbstractController
     {
         $annonceModel = new AnnonceModel();
 
-        $annonces = $annonceModel->findAll();
+        //$annonces = $annonceModel->findAll();
         
-
+            //je determine sur quelle page je me trouve 
+            if(isset($_GET['p']) && !empty($_GET['p'])) {  // verifie si parametre en Get et verifie pas vide
+                $currentPage = $_GET['p']; //si page defini egale numero page
+                }else{
+                $currentPage = 1;  // sinon si y a rien on dit on est page 1
+            }
+        
+            $nbPageTotals = $annonceModel->countPage();
+            $cherchepages = $annonceModel->findbypage($currentPage);
+        
         $this->render('list.php', [
-            'annonces' => $annonces, 
-            
+            'nbPageTotals' => $nbPageTotals, 
+            'cherchepages' => $cherchepages,
+            'currentPage' => $currentPage
+
         ]);
         
     }
@@ -37,8 +48,6 @@ class ListController extends AbstractController
             $image= trim($_POST['image']);
         }
 
-      
-
         if (!empty($name)) {
             // je crée
             $annonceModel = new AnnonceModel();
@@ -49,26 +58,6 @@ class ListController extends AbstractController
         $this->render('formulaireajout.php', [
           
     ]);
-
-   
-    
-    }
-    public function paginations()
-    {
-        $annonceModel = new AnnonceModel();
-
-       
-     
-        
-        $result=$annonceModel->pagination();
-
-        $this->render('list.php', [
-            'result' => $result, 
-            
-        ]);
-        
-
-
     }
 }
     

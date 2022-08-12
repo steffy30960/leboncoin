@@ -52,11 +52,15 @@
                 <option selected>Catégorie</option>
                 <option value="1">Ameublement</option>
                 <option value="2">Animaux</option>
+                <option value="7">Bijou</option>
+                <option value="7">Electroménager</option>
                 <option value="3">Enfant</option>
                 <option value="4">Maison</option>
                 <option value="5">Mode</option>
+                <option value="7">Moto</option>
                 <option value="6">Téléphonie</option>
-                <option value="7">Véhicules</option>
+                <option value="7">Véhicule</option>
+               
                 
         </select>
       </div>

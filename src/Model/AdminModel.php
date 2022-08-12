@@ -135,7 +135,6 @@ class AdminModel
 
         $result= $pdoStatement->fetchAll();
 
-        var_dump($result);
         
         return $result;
 

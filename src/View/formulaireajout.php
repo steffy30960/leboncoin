@@ -25,6 +25,9 @@
         <input class="form-control me-2" type="search" placeholder="Rechercher une annonce" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Rechercher</button>
       </form>
+      <div class="col-auto">
+      <a  class="btn" href="?page=admin" >Admin</a>
+    </div>   
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Mes recherches</a>
