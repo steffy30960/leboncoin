@@ -65,7 +65,7 @@ class AnnonceModel
                 ,`image`
                 ,`departement`
                 FROM ' . self::TABLE_NAME . '
-                  WHERE `id` = :id
+                  WHERE `id` = :id 
                   ORDER BY `id` DESC;
           ';
 
@@ -160,11 +160,13 @@ class AnnonceModel
   
     // je calcul le premier aticle de la page total
     $premier = ($currentPage * $parPage) - $parPage;
+    $datetoday = date('Y-m-d H:i:s', strtotime("-12 day"));
 
     // je recupere mes articles par ordre décroissant 
-    $sql = 'SELECT * FROM `articles` 
+    $sql = "SELECT * FROM `articles` 
+                    WHERE `date_de_parution` > '$datetoday'
                     ORDER BY `date_de_parution` 
-                    DESC LIMIT :premier, :parPage';
+                    DESC LIMIT :premier, :parPage";
 
     //je prepare la requete 
     $pdoStatement = $this->pdo->prepare($sql);
