@@ -13,6 +13,7 @@ class SearchController extends AbstractController
 
     public function index()
     {
+        // function recherche par nom et departement
         $annonceModel = new AnnonceModel();
         
         // je récupère le name , la categorie et le departement depuis l'url

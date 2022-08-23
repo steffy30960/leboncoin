@@ -66,7 +66,7 @@ class AnnonceModel
                 ,`departement`
                 FROM ' . self::TABLE_NAME . '
                   WHERE `id` = :id
-                  ORDER BY `id` ASC;
+                  ORDER BY `id` DESC;
           ';
 
         $pdoStatement = $this->pdo->prepare($sql);
@@ -75,7 +75,7 @@ class AnnonceModel
         $result = $pdoStatement->fetchObject(self::class);
         return $result;
     }
-    
+    // fonction recherche par nom et departement
         public function search($name, $departement)
         {
     
@@ -92,7 +92,7 @@ class AnnonceModel
                     WHERE 
                     `name` LIKE '%$name%' AND
                     `departement` LIKE '%$departement%' 
-                    ORDER BY `id` ASC;
+                    ORDER BY `id` DESC;
             ";
             //`departement` LIKE '%$departement%' AND
            // `categorie` LIKE '%$categorie%' 
