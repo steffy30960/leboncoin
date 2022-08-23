@@ -25,7 +25,7 @@ class Application
         'search' => [
             'controller' => 'SearchController',
             'method' => 'index'
-        ],
+        ],    
         'error404' => [
             'controller' => 'ErrorController',
             'method' => 'error404'

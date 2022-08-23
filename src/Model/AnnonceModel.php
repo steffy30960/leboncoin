@@ -76,7 +76,7 @@ class AnnonceModel
         return $result;
     }
     
-        public function search($name = '', $categorie = "")
+        public function search($name)
         {
     
             $sql = "SELECT
@@ -89,15 +89,24 @@ class AnnonceModel
                     ,`image`
                     ,`departement`
                     FROM " . self::TABLE_NAME . "
-                    WHERE `name` LIKE '%$name%'
+                    WHERE 
+                    `name` LIKE '%$name%' 
+                
                     ORDER BY `id` ASC;
             ";
-
+            //`departement` LIKE '%$departement%' AND
+           // `categorie` LIKE '%$categorie%' 
         $pdoStatement = $this->pdo->prepare($sql);
+        //$pdoStatement->bindValue(':name', $name, PDO::PARAM_STR);
+        //$pdoStatement->bindValue(':departement', $departement, PDO::PARAM_INT);  
+        //$pdoStatement->bindValue(':categorie', $categorie, PDO::PARAM_STR);
         $result = $pdoStatement->execute();
         $result = $pdoStatement->fetchAll(PDO::FETCH_CLASS, self::class);
         return $result;
     }
+    
+
+
 
     public function create($name, $prix, $description, $date_de_parution,$categorie, $image, $departement)
     {
