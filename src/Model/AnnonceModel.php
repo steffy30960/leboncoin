@@ -76,7 +76,7 @@ class AnnonceModel
         return $result;
     }
     
-        public function search($name)
+        public function search($name, $departement)
         {
     
             $sql = "SELECT
@@ -90,8 +90,8 @@ class AnnonceModel
                     ,`departement`
                     FROM " . self::TABLE_NAME . "
                     WHERE 
-                    `name` LIKE '%$name%' 
-                
+                    `name` LIKE '%$name%' AND
+                    `departement` LIKE '%$departement%' 
                     ORDER BY `id` ASC;
             ";
             //`departement` LIKE '%$departement%' AND
@@ -104,10 +104,7 @@ class AnnonceModel
         $result = $pdoStatement->fetchAll(PDO::FETCH_CLASS, self::class);
         return $result;
     }
-    
-
-
-
+   
     public function create($name, $prix, $description, $date_de_parution,$categorie, $image, $departement)
     {
     $sql = 'INSERT INTO ' . self::TABLE_NAME . '

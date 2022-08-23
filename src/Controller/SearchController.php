@@ -14,22 +14,26 @@ class SearchController extends AbstractController
     public function index()
     {
         $annonceModel = new AnnonceModel();
-        // je récupère le name , la categorie et le departement depuis le formulaire,
-        if (isset($_GET['name'])){//|| isset($_GET['departement'])) { //|| isset($_POST['departement']) || isset($_POST['categorie'])){
+        
+        // je récupère le name , la categorie et le departement depuis l'url
+        if (isset($_GET['name']) || isset($_GET['departement'])) { //|| isset($_GET['categorie'])){
             $name = trim($_GET['name']);
-            //$departement= trim($_GET['departement']);
-            //$categorie= trim($_POST['categorie']);
+            $departement= trim($_GET['departement']);
+            //$categorie= trim($_GET['categorie']);
+   
         } else {
             $name = '';
-            //$departement='';
-            //$categorie='';
+            $departement = '';
+            //$categorie = '';
         }
 
-      
-            $annonces = $annonceModel->search($name);
+
+        $annonces = $annonceModel->search($name, $departement);
+     
 
         $this->render('searchformulaire.php', [
-            'annonces' => $annonces
+            'annonces' => $annonces,
+           
 
         ]);
     }

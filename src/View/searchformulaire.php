@@ -21,10 +21,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Rechercher une annonce" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Rechercher</button>
-        </form>
+      
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">Mes recherches</a>
@@ -88,6 +85,10 @@
               </a>
             </h5>
             <p class="card-text"><?= $annonce->getDescription() ?></p>
+            <p class="card-text"> Description : <?= $annonce->getDescription() ?></p>
+            <p class="card-text"> Département : <?= $annonce->getDepartement() ?></p>
+            <p class="card-text"> date de parution : <?= $annonce->getDate_de_parution() ?></p>
+            <p class="card-text"> Prix : <?= $annonce->getPrix() ?> euros</p>
           </div>
         </div>
       <?php endforeach ?>
