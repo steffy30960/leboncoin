@@ -35,9 +35,12 @@ class AnnonceController extends AbstractController
             $result = $messageModel->save($message,$id);
           
         }
+      
         $this->render('annonce.php', [
             'annonce' => $annonce,
-            'result' => $result ?? null
+            'result' => $result ?? null,
+        
+            
 
         ]);
     }

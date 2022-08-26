@@ -130,9 +130,13 @@ class AnnonceModel
     return $this->pdo->lastInsertId();
     }
     public function countPage() {
+        
+    $datetoday = date('Y-m-d', strtotime("-18 day"));
 
     // on determine le nombre total d'aticles
-    $sql = 'SELECT COUNT(*) AS nb_articles FROM `articles`;';
+    $sql = "SELECT COUNT(*) AS nb_articles FROM `articles` 
+            WHERE `date_de_parution` >  '$datetoday'
+    ";
 
     //je prepare la requete
     $pdoStatement = $this->pdo->prepare($sql);
@@ -144,7 +148,6 @@ class AnnonceModel
 
     //je declare la varieble qui recupere
     $nbArticles = (int) $result['nb_articles'];
-
     // je détermine le nombre d'article par page
     $parPage = 15;
 
@@ -160,7 +163,7 @@ class AnnonceModel
   
     // je calcul le premier aticle de la page total
     $premier = ($currentPage * $parPage) - $parPage;
-    $datetoday = date('Y-m-d H:i:s', strtotime("-12 day"));
+    $datetoday = date('Y-m-d H:i:s', strtotime("-18 day"));
 
     // je recupere mes articles par ordre décroissant 
     $sql = "SELECT * FROM `articles` 

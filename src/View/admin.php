@@ -35,6 +35,7 @@
           <p><?= $annonce->getDepartement() ?></p>
           <p><?= $annonce->getDate_de_parution() ?></p>
           <p><?= $annonce->getPrix() ?> euros</p>
+       
          <div class="center"> 
           <a href="?page=createAnnonce" class="btn btn-primary">Ajouter</a>
           <a href="?id=<?= $annonce->getId()?>&page=delete"class="btn btn-primary">Supprimer</a>

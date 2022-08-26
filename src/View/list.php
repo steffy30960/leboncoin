@@ -86,6 +86,8 @@
         <a href="./?page=list&p=<?= $currentPage - 1 ?>"
         class="page-link">Précédente</a>
       </li>
+    
+  
       <?php for($page = 1; $page <= $nbPageTotals; $page++): ?>
         <!-- Lien vers chacune des pages (activé si on se trouve sur la page correspondante) -->
         <li class="page-item <?= ($currentPage == $page) ? "active" : "" ?>">
